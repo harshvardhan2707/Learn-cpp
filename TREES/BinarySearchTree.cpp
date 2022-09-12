@@ -1,6 +1,4 @@
-#include <iostream>
-#include <cmath>
-#include <queue>
+#include <bits/stdc++.h>
 using namespace std;
 struct BstNode{
     int data;
@@ -96,6 +94,61 @@ void PostOrder(BstNode* root){
     cout<<root->data<<" ";
     
 }
+void iterPreOrder(BstNode* root){
+    stack<BstNode*> X;
+    if(root==NULL)return;
+    X.push(root);
+    while(!X.empty()){
+        BstNode* l=X.top();
+        X.pop();
+        cout<<l->data<<" ";
+        if(l->right)X.push(l->right);
+        if(l->left)X.push(l->left);
+    }
+    // while(root || !X.empty()){
+    //     if(root){
+    //         cout<<root->data<<" ";
+    //         X.push(root);
+    //         root=root->left;
+    //     }
+    //     else{
+    //         root=X.top();
+    //         X.pop();
+    //         root=root->right;
+    //     }
+    // }
+}
+void iterInOrder(BstNode* root){
+    stack<BstNode*> X;
+    while(root || !X.empty()){
+        if(root){
+            X.push(root);
+            root=root->left;
+        }
+        else{
+            root=X.top();
+            X.pop();
+            cout<<root->data<<" ";
+            root=root->right;
+        }
+    }
+}
+// void iterPostOrder(BstNode* root){
+//     stack<BstNode*> X;
+//     while(root || !X.empty()){
+//         if(root){
+//             X.push(root);
+//             root=root->left;
+//         }
+//         else{
+//             root=X.top();
+//             X.pop();
+//             root=root->right;
+//         }
+//         cout<<root->data<<" ";
+//     }
+// }
+
 // bool isSubTreeLesser(BstNode* root,int value){
 //     if(root==NULL) return true;
 //     if(root->data<=value && isSubTreeLesser(root->left,value) && isSubTreeLesser(root->right,value)) return true;
@@ -147,12 +200,18 @@ BstNode* Delete(BstNode* root,int data){
     return root;
 }
 int main(){
-    int user,x;cin>>user;int no;BstNode* root=NULL;
+    int no,x;cin>>no;BstNode* root=NULL;
     for(int i=0;i<no;i++){
         cin>>x;
         root=Insert(root,x);
     }
-    PostOrder(root);
+    PreOrder(root);
+    cout<<"\n";
+    iterPreOrder(root);
+    cout<<"\n";
+    InOrder(root);
+    cout<<"\n";
+    iterInOrder(root);
     // int m;
     // cin>>m;
     // if(search(root,m)) cout<<"Found";
@@ -164,6 +223,6 @@ int main(){
     
     // PostOrder(root);
     // if(isBST(root,INT_MIN,INT_MAX)) cout<<"True";
-    Delete(root,10);
-    InOrder(root);cout<<"\n";
+    // Delete(root,10);
+    // InOrder(root);cout<<"\n";
 }

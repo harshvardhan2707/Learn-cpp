@@ -1,7 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
 int main(){
-    int i=10;
-    int &j=i;
-    cout<<i<<" "<<j<<" "<<&i<<" "<<&j;
+    cout<<(long long)2e18;
 }
